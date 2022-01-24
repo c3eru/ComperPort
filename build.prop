@@ -53,7 +53,7 @@ ro.product.locale=en-GB
 ro.wifi.channels=
 # Do not try to parse thumbprint
 # end build properties
-ro.product.mod_device=ginkgo_global
+ro.product.mod_device=sweet_global
 persist.sys.mitalk.enable=true
 ro.config.ringtone=Ring_Synth_04.ogg
 ro.config.notification_sound=pixiedust.ogg
@@ -314,7 +314,7 @@ ro.miui.ui.version.name=V130
 ro.fota.oem=Xiaomi
 ro.vendor.build.software.version=Android12_130
 ro.com.android.mobiledata=false
-ro.miui.cust_device=ginkgo
+ro.miui.cust_device=sweet
 ro.mi.development=false
 ro.appsflyer.preinstall.path=/data/miui/pai/pre_install.appsflyer
 ro.miui.pai.preinstall.path=/data/miui/pai/
@@ -399,10 +399,4 @@ persist.sys.miui_scout_enable=true
 # Auto-added by post_process_props.py
 persist.sys.usb.config=none
 # end of file
-ro.sys.sdcardfs=0
-persist.sys.disable_rescue=true
-ro.control_privapp_permissions=disable
-ro.nnapi.extensions.deny_on_product=true
-ro.lmk.kill_heaviest_task=true
-ro.lmk.kill_timeout_ms=100
-ro.lmk.use_minfree_levels=true
+
