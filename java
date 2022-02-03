@@ -1,12 +1,14 @@
 //
-// Decompiled by Jadx - 2367ms
+// Decompiled by Jadx - 2220ms
 //
 package com.android.systemui.controlcenter.phone;
 
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Point;
+import android.preference.SettingsHelper;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -86,6 +88,13 @@ public class QSControlCenterTileLayout extends ViewGroup implements QSPanel.QSTi
 
     private static int exactly(int i) {
         return View.MeasureSpec.makeMeasureSpec(i, 0x40000000);
+    }
+
+    private int getColumn() {
+        if (getResources().getConfiguration().orientation == 2) {
+            return 4;
+        }
+        return SettingsHelper.getIntofSettings("qc_controlcenter_column", 4);
     }
 
     private int getColumnStart(int i) {
@@ -317,6 +326,17 @@ public class QSControlCenterTileLayout extends ViewGroup implements QSPanel.QSTi
             i3 = this.mMaxHeight;
         }
         setMeasuredDimension(size, i3);
+        StringBuilder sb = new StringBuilder();
+        sb.append("onMeasure height:");
+        float f2 = this.mNewHeight;
+        int i4 = this.mMinHeight;
+        if (f2 > ((float) i4)) {
+            i4 = this.mMaxHeight;
+        }
+        sb.append(i4);
+        sb.append("  showLines:");
+        sb.append(this.mShowLines);
+        Log.d("QSControlCenterTileLayout", sb.toString());
     }
 
     public void onTilesChanged() {
@@ -466,9 +486,10 @@ public class QSControlCenterTileLayout extends ViewGroup implements QSPanel.QSTi
         this.mPanelPaddingHorizontal = (float) this.mContext.getResources().getDimensionPixelSize(R.dimen.qs_control_panel_margin_horizontal);
         this.mPanelLandWidth = (float) this.mContext.getResources().getDimensionPixelSize(R.dimen.qs_control_width_land);
         this.mLastCellPaddingBottom = this.mContext.getResources().getDimensionPixelSize(R.dimen.qs_tile_label_padding_top);
-        int integer = this.mContext.getResources().getInteger(R.dimen.qs_control_tiles_columns);
-        if (this.mColumns != integer) {
-            this.mColumns = integer;
+        Resources resources = this.mContext.getResources();
+        int column = getColumn();
+        if (this.mColumns != column) {
+            this.mColumns = column;
             Iterator<QSPanel.TileRecord> it = this.mRecords.iterator();
             while (it.hasNext()) {
                 QSPanel.TileRecord next = it.next();
